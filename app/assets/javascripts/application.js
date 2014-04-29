@@ -22,12 +22,10 @@ $(document).ready(function(){
     event.preventDefault();
     var search Value = $('#search').val();
 
-    $.ajax({
-      url: '/products/?search=' + search Value,
-      type: 'GET',
-      dataTpye: 'html'
-    }).done(function(data){
-      $('#products').html(data);
+    $.get( '/products/?search=' + search Value)
+       .done(function(data){
+         console.log(data);
+       $('#products').html(data);
     });
   });
 });
