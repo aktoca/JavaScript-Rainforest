@@ -14,3 +14,20 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//
+//
+
+$(document).ready(function(){
+  $('#search-form').submit(function(event) {
+    event.preventDefault();
+    var search Value = $('#search').val();
+
+    $.ajax({
+      url: '/products/?search=' + search Value,
+      type: 'GET',
+      dataTpye: 'html'
+    }).done(function(data){
+      $('#products').html(data);
+    });
+  });
+});
