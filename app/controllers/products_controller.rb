@@ -3,16 +3,15 @@ class ProductsController < ApplicationController
 
   def index
     @products = if params[:search]
-         Product.where("name LIKE ?", "%#{params[:search]}%")
-      else
-         Product.all
+      Product.where("name LIKE ?", "%#{params[:search]}%")
+     else
+       Product.all
      end
-  end
 
-  def search
-    @products = Product.where("name LIKE ?", "%{params[:search]}%")
-    if current_user
-      @review = @product.reviews.build
+    respond_to do |format|
+      format.html
+      format.js
+
     end
   end
 

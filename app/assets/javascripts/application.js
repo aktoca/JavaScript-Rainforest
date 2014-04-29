@@ -22,7 +22,7 @@ $(document).ready(function(){
     event.preventDefault();
     var search Value = $('#search').val();
 
-    $.get( '/products/?search=' + search Value)
+    $.getScript( '/products/?search=' + search Value)
        .done(function(data){
          console.log(data);
        $('#products').html(data);
