@@ -1,4 +1,7 @@
-$('products').html("<%= j(render @products) %>");
+<% if params[:search]  %>
+  $('#products').html("<%= j(render @products) %>");
+<% else %>
+  $('#products').append('<%= j(render(@products)) %>');
+$('.pagination').replaceWith('<%= j(paginate(@products)) %>');
+<% end %>
 
-$('#products').append('<%= j render(@products) %>');
-$('.pagination').replaceWith('<%= j paginate(@products) %>');

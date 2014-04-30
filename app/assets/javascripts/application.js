@@ -17,23 +17,22 @@
 //
 //
 jQuery(function() {
-  $(window).scroll(function() {
-    if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
-      console.log($('.pagination span.next').children().attr('href'));
-      $.getScript($('.pagination span.next').children().attr('href'));
-    }
-  });
+  if ($('.pagination').length) {
+    $(window).scroll(function() {
+      var url = $('.pagination span.next').children().attr('href'); 
+      if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
+        $('.pagination').text('Fetching more products...');
+        return $.getScript(url);
+      }
+    });
+  }
 });
 
 $(document).ready(function(){
-//  $('#search-form').submit(function(event) {
-//    event.preventDefault();
-//    var search Value = $('#search').val();
-//
-//    $.getScript( '/products/?search=' + search Value)
-//    .done(function(data){
-//      console.log(data);
-//      $('#products').html(data);
-//    });
-//  });
-});
+    $('#search-form').submit(function(event) {
+      event.preventDefault();
+      var searchValue = $('#search').val();
+  
+      $.getScript( '/products/?search=' + searchValue)
+      });
+    });
