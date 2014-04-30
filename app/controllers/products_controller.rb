@@ -8,10 +8,11 @@ class ProductsController < ApplicationController
        Product.all
      end
 
+    @products = @products.page(params[:page]).order("created_at DESC");
+
     respond_to do |format|
       format.html
       format.js
-
     end
   end
 

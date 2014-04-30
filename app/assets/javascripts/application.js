@@ -16,6 +16,15 @@
 //= require_tree .
 //
 //
+jQueary(function() {
+  $(window).scroll(function() {
+    if ($window).scrollTop() > $(document).height() - $(window).height() - 50) {
+      return alert('near bottom');
+    }
+  });
+});
+
+
 
 $(document).ready(function(){
   $('#search-form').submit(function(event) {

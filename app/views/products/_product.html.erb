@@ -1,9 +1,9 @@
   <br /> ------------------------<br/>
-  <b><%= product[:name] %></b>  <br />
+
+  <%= link_to  product[:name], product_path(product.id) %>
+  <b><%=%></b>  <br />
   <%= product[:description] %> <br />
   <%= product.formatted_price %><br />
   Comments:<%= product.reviews.count%> <br />
-  <%= link_to "View", product_path(product.id) %>
   <br />
  
-
