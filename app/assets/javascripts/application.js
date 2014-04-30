@@ -16,25 +16,24 @@
 //= require_tree .
 //
 //
-jQueary(function() {
+jQuery(function() {
   $(window).scroll(function() {
-    if ($window).scrollTop() > $(document).height() - $(window).height() - 50) {
-      return alert('near bottom');
+    if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
+      console.log($('.pagination span.next').children().attr('href'));
+      $.getScript($('.pagination span.next').children().attr('href'));
     }
   });
 });
 
-
-
 $(document).ready(function(){
-  $('#search-form').submit(function(event) {
-    event.preventDefault();
-    var search Value = $('#search').val();
-
-    $.getScript( '/products/?search=' + search Value)
-       .done(function(data){
-         console.log(data);
-       $('#products').html(data);
-    });
-  });
+//  $('#search-form').submit(function(event) {
+//    event.preventDefault();
+//    var search Value = $('#search').val();
+//
+//    $.getScript( '/products/?search=' + search Value)
+//    .done(function(data){
+//      console.log(data);
+//      $('#products').html(data);
+//    });
+//  });
 });
