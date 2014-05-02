@@ -6,29 +6,12 @@ Price: <%= @product.formatted_price %>
 
 </p>
 
+
 <h3>Reviews for <%= @product.name %></h3>
- <%= @product.reviews.last.inspect %>
- <% @product.reviews.each do |review| %>
-  <p>
-  ------------------<br/>
-  Comment: <%= review.comment %>
-  <br />
-    <%if review.user != nil %>
-      <em> by <%= review.user.name  %></em><br />
-      Added on: <%= review.created_at %>
-    <% end %>
 
-   </p> 
- <% end %>
-
- <% if current_user %>
-   <h4>New Review</h4>
-   <div id="review-list">
-     <%= render :partial => "reviews" %>
- </div>
- <%else %>
-   <p>Please <%= link_to "log in", new_session_path %> to add a review.</p>
- <%end%>
+  <div id="review-list">
+    <%= render :partial => "reviews" %>
+  </div>
 
 <%= link_to "Back", products_path %> | 
 <%= link_to "Edit", edit_product_path(@product) %>   <br />
@@ -36,12 +19,43 @@ Price: <%= @product.formatted_price %>
  <br />
 <%= button_to "Delete", @product, method: :delete, :class => :destroy %>
 
+<% if current_user %>
+
+  <h4>New Review</h4>
+
+
+  <div id="new_review">
+    <%= form_for [@product, @review], :remote => true  do |f| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+      <ul>
+        <% @review.errors.full_message.each do |msg| %>
+          <li><%= msg %></li>
+        <% end%>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :comment %><br />
+    <%= f.text_area :comment %>
+  </div> 
+  <div class="actions">
+    <%= f.submit %><br />
+  </div> 
+<% end %>
+</div>
+<% else %>
+  <p>Please <%= link_to "log in", new_session_path %> to add a review.</p>
+<% end %>
+
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#new_review")
-    .on('ajax:beforeSend', function() {alert("loading!");})
-    .on('ajax:success', function(data, status, xhr) {alert("success");})
-    .on('ajax:error', function(xhr, status, error) {alert("error!");})
-    .on('ajax:complete ', function() {alert("complete!");})
-  });
+$(function() {
+$("#new_review")
+.on('ajax:beforeSend', function() {
+$("input[type='submit']")
+.val('Saving...')
+.attr('disabled','disabled');
+})
+});
 </script>
