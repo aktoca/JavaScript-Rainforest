@@ -3,5 +3,6 @@
 <% else %>
   $("#review-form-errors").html("");
   $("#review-list").html("<%= escape_javascript(render(:partial => '/products/reviews')) %>");
-  $("#new_review")[0].reset();
+$("#review_comment").val('');
 <% end %>
+
